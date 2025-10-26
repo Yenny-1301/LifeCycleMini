@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -86,5 +87,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         addEvent("onDestroy()");
+    }
+
+    @Override protected void onSaveInstanceState(@NonNull Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_COUNTER, instanceCounter);
+        outState.putString(KEY_LOGTEXT, txtLog.getText().toString());
+        addEvent("onSaveInstanceState()");
+    }
+
+    @Override protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+        addEvent("onRestoreInstanceState()");
     }
 }
